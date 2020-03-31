@@ -1,16 +1,15 @@
 import sqlite3
 import os
-import sys
+
 db= "database.db"
 
+##checks if the database file exists
 def db_exist():
      if os.path.exists(db):
           return True
 
-
-
-
-def db_create():
+##Creates database connection
+def connection(db):
      try:
           conn = sqlite3.connect(db)
           return conn
@@ -18,7 +17,23 @@ def db_create():
           print(error)
      return None
 
+##Creates table in database
+def create_table(conn, create_table_sql):
+    """ create a table from the create_table_sql statement
+    :param conn: Connection object
+    :param create_table_sql: a CREATE TABLE statement
+    :return:
+    """
+    try:
+        db_conn = conn.cursor()
+        db_conn.execute(create_table_sql)
+    except ConnectionError as e:
+        print(e)
+##Initial step that is executed
 def step1():
+     if not os.path.exists(db):
+          os.mknod(db)
+
      user_table = """CREATE TABLE `user` (
      `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
      `uname` BLOB,
@@ -29,8 +44,15 @@ def step1():
 	`tag`	BLOB NOT NULL,
 	`uname`	BLOB,
 	`pswd`	BLOB);"""
+     conn = connection(db)
+     if conn is not None:
+          create_table(conn, user_table)
+          create_table(conn, data_table)
+     else:
+          print("Error in database connection")
 
-
+def login():
+     print("login")
 
 #Frontend
 def display():
