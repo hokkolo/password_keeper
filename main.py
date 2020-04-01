@@ -6,6 +6,6 @@ if db_exist() is True:
     create_user()
 else:
     step1()
-    display()
+    create_user()
 
 
