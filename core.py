@@ -64,8 +64,10 @@ def create_user():
           pword = input("Enter Password: ")
           data = (uname,pword)
           db_connect1 = conn.cursor()
-          db_connect1.execute('insert into user (uname,pword) values (?,?)', data)
+          db_connect1.execute('insert into user (uname,password) values (?,?)', data)
           conn.commit()
+          print("Thank you for creating account" )
+          login()
      else:
           login()
 
