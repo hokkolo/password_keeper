@@ -3,9 +3,9 @@
 from core import *
 
 if db_exist() is True:
-    login()
+    create_user()
 else:
     step1()
-display()
+    display()
 
 

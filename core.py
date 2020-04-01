@@ -51,8 +51,45 @@ def step1():
      else:
           print("Error in database connection")
 
+def create_user():
+     conn = connection(db)
+     db_connect = conn.cursor()
+     db_connect.execute("select count(*) from user")
+     count = db_connect.fetchall()
+     if count == 0:
+          print("Creating new user")
+          uname = input("Enter Username: ")
+          pword = input("Enter Password: ")
+          data = (uname,pword)
+          db_connect1 = conn.cursor()
+          db_connect1.execute('insert into user (uname,pword) values (?,?)', data)
+          conn.commit()
+     else:
+          login()
+
 def login():
-     print("login")
+     conn = connection(db)
+     print("Enter login details")
+     uname = input("Enter Username: ")
+     pword = input("Enter Password: ")
+     data = (uname, pword)
+     db_connect = conn.cursor()
+     db_connect.execute('select pword from user where uname=?',(uname,))
+     db_pword = db_connect.fetchall()
+     if db_pword == pword:
+          display()
+     else:
+          log = input("login failed...! Invalid user credentials.. Try again [y/n]")
+          if log == 'y':
+               login()
+          else:
+               exit()
+
+
+
+
+
+
 
 #Frontend
 def display():
@@ -89,9 +126,4 @@ def edit():
 
 def deletion():
      print("delete")
-
-
-
-
-
 
