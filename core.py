@@ -56,7 +56,9 @@ def create_user():
      db_connect = conn.cursor()
      db_connect.execute("select count(*) from user")
      count = db_connect.fetchall()
-     if count == 0:
+     for val in count:
+          user = val(0)
+     if user == 0:
           print("Creating new user")
           uname = input("Enter Username: ")
           pword = input("Enter Password: ")
@@ -72,7 +74,6 @@ def login():
      print("Enter login details")
      uname = input("Enter Username: ")
      pword = input("Enter Password: ")
-     data = (uname, pword)
      db_connect = conn.cursor()
      db_connect.execute('select pword from user where uname=?',(uname,))
      db_pword = db_connect.fetchall()
