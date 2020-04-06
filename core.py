@@ -3,10 +3,9 @@ import os
 import getpass
 import string
 import random
-
+import prettytable
 from sqlite3 import Error
 from prettytable import PrettyTable
-from passwordgenerator import pwgenerator
 
 db= "database.db"
 
@@ -38,7 +37,7 @@ def create_table(conn, create_table_sql):
         print(e)
 
 def id_generator():
-	pwo = pwgenerator()
+	pwo = passwordgenerator
 	pwo.minlen = 15
 	pwo.excludeschars = "^'"
 	return pwo.generate()
@@ -132,13 +131,13 @@ def insertion():
      print("Save your password")
      tag = input("Enter name for your entry: ")
      uname = input("Enter username: ")
-     o = input("Generate password [y/n] ")
-     if o == 'y':
-          pword = id_generator()
-          print("your strong password is : {} ".format(pword))
-          print("Saved....!!")
-     else:
-          pword = getpass.getpass(prompt='Enter Password: ')
+#     o = input("Generate password [y/n] ")
+#     if o == 'y':
+#          pword = id_generator()
+#         print("your strong password is : {} ".format(pword))
+#          print("Saved....!!")
+#     else:
+     pword = getpass.getpass(prompt='Enter Password: ')
      data = (tag,uname,pword)
      conn = connection(db)
      handle = conn.cursor()
