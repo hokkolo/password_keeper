@@ -36,11 +36,11 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def id_generator():
-	pwo = passwordgenerator
-	pwo.minlen = 15
-	pwo.excludeschars = "^'"
-	return pwo.generate()
+#def id_generator():
+#	pwo = passwordgenerator
+#	pwo.minlen = 15
+#	pwo.excludeschars = "^'"
+#	return pwo.generate()
 
 ##Initial step that is executed
 def step1():
@@ -147,7 +147,26 @@ def insertion():
 
 
 def search():
-     print("search")
+      val = input("Display all entries (y/n): ")
+      if val == "y":
+           display_all()
+           tag = input("Enter the tag name: ")
+      elif val == "n":
+           tag = input("Enter the tag name: ")
+      conn = connection(db)
+      handle = conn.cursor()
+
+
+def display_all():
+     conn = connection(db)
+     handle = conn.cursor()
+     handle.execute('select distinct tag from data')
+     val = handle.fetchall()
+     tmp = PrettyTable(['values'])
+     for i in val:
+          tmp.add_row([i[0]])
+     print(tmp)
+     handle.close()
 
 def edit():
      print("edit")
