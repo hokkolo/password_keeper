@@ -153,9 +153,18 @@ def search():
            tag = input("Enter the tag name: ")
       elif val == "n":
            tag = input("Enter the tag name: ")
+      else:
+           print("Invalid entry")
+           display()
       conn = connection(db)
       handle = conn.cursor()
-
+      handle.execute("select tag,uname,pswd from data where tag like ? ", ['%' + tag + '%'])
+      records = handle.fetchall()
+      t = PrettyTable(['Tag', 'Username', 'Password'])
+      for row in records:
+           t.add_row([row[0], row[1], row[2]])
+      print(t)
+      handle.close()
 
 def display_all():
      conn = connection(db)
