@@ -126,6 +126,7 @@ def display():
           exit()
      else:
           print("Invalid entry")
+          display()
 
 def insertion():
      print("Save your password")
@@ -143,6 +144,7 @@ def insertion():
      handle = conn.cursor()
      handle.execute('insert into data (tag,uname,pswd) values (?,?,?)', data)
      conn.commit()
+     display()
 
 
 
@@ -165,6 +167,7 @@ def search():
            t.add_row([row[0], row[1], row[2]])
       print(t)
       handle.close()
+      display()
 
 def display_all():
      conn = connection(db)
