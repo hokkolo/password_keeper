@@ -187,8 +187,9 @@ def edit():
      new_uname = input("Enter new Username: ")
      new_pword = input("Enter new Password: ")
      new_data = (new_uname,new_pword,sch)
-     sql_query = """update data set uname = ?, set pswd = ? where tag = ?"""
-     handle.execute(sql_query,new_data)
+#     sql_query = """update data set uname = ?, set pswd = ? where tag = ?"""
+#     handle.execute(sql_query,new_data)
+     handle.execute('update data set uname = ?, set pswd = ? where tag = ?',new_data)
      print("Record Updated Successfully")
      handle.close()
      display()
