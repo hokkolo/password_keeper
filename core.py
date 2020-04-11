@@ -188,10 +188,11 @@ def edit():
      new_uname = input("Enter new Username: ")
      new_pword = input("Enter new Password: ")
      new_data = (new_tag,new_uname,new_pword,sch)
-     sql_query = """update data set tag = ?, set uname = ?, set pword = ? where tag = ?"""
+     sql_query = """update data set tag = ?, set uname = ?, set pswd = ? where tag = ?"""
      handle.execute(sql_query,new_data)
      print("Record Updated Successfully")
      handle.close()
+     display()
 
 def deletion():
      print("delete")
