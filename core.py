@@ -1,9 +1,6 @@
 import sqlite3
 import os
 import getpass
-import string
-import random
-import prettytable
 from sqlite3 import Error
 from prettytable import PrettyTable
 
@@ -35,12 +32,6 @@ def create_table(conn, create_table_sql):
         db_conn.execute(create_table_sql)
     except Error as e:
         print(e)
-
-#def id_generator():
-#	pwo = passwordgenerator
-#	pwo.minlen = 15
-#	pwo.excludeschars = "^'"
-#	return pwo.generate()
 
 ##Initial step that is executed
 def step1():
@@ -106,10 +97,10 @@ def login():
 #Frontend
 def display():
      OPT = "Welcome to My Password Manager" + "\n" + \
-     "1. Save a Password" + "\n" + \
-     "2. Search Password" + "\n" + \
-     "3. Edit Password" + "\n" + \
-     "4. Delete Password" + "\n" + \
+     "1. Add an Entry" + "\n" + \
+     "2. Search Entries" + "\n" + \
+     "3. Edit Entries" + "\n" + \
+     "4. Delete an Entry" + "\n" + \
      "5. Exit"
      print(OPT)
      VAL = input("Enter your option: ")
@@ -122,7 +113,7 @@ def display():
      elif VAL == "4":
           deletion()
      elif VAL == "5":
-          print("Thank you for using Password manager")
+          print("Thank you for using Password manager \n")
           exit()
      else:
           print("Invalid entry")
@@ -132,12 +123,6 @@ def insertion():
      print("Save your password")
      tag = input("Enter name for your entry: ")
      uname = input("Enter username: ")
-#     o = input("Generate password [y/n] ")
-#     if o == 'y':
-#          pword = id_generator()
-#         print("your strong password is : {} ".format(pword))
-#          print("Saved....!!")
-#     else:
      pword = getpass.getpass(prompt='Enter Password: ')
      data = (tag,uname,pword)
      conn = connection(db)
@@ -187,8 +172,6 @@ def edit():
      new_uname = input("Enter new Username: ")
      new_pword = input("Enter new Password: ")
      new_data = (new_uname,new_pword,sch)
-#     sql_query = """update data set uname = ?, set pswd = ? where tag = ?"""
-#     handle.execute(sql_query,new_data)
      handle.execute('update data set uname = ?, pswd = ? where tag = ?',new_data)
      print("Record Updated Successfully" + "\n" + \
            "============================")
