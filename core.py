@@ -190,10 +190,19 @@ def edit():
 #     sql_query = """update data set uname = ?, set pswd = ? where tag = ?"""
 #     handle.execute(sql_query,new_data)
      handle.execute('update data set uname = ?, pswd = ? where tag = ?',new_data)
-     print("Record Updated Successfully")
+     print("Record Updated Successfully" + "\n" + \
+           "============================")
      handle.close()
      display()
 
 def deletion():
-     print("delete")
+     conn = connection(db)
+     handle = conn.cursor()
+     var = input("Enter the tag to delete: ")
+     sql_query = """delete from data where tag=?"""
+     handle.execute(sql_query,var)
+     print("Record Deleted Successfully" + "\n" + \
+           "============================")
+     handle.close()
+     display()
 
