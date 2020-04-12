@@ -200,7 +200,7 @@ def deletion():
      handle = conn.cursor()
      var = input("Enter the tag to delete: ")
      sql_query = """delete from data where tag=?"""
-     handle.execute(sql_query,var)
+     handle.execute(sql_query,(var,))
      print("Record Deleted Successfully" + "\n" + \
            "============================")
      handle.close()
